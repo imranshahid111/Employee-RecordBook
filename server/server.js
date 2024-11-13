@@ -5,7 +5,7 @@ import resolvers from './graphql/resolvers.js';
 import connectDB from './config/db.js';
 
 const app = express();
-const PORT = process.env.PORT || 4000;
+const PORT =  4000;
 
 
 connectDB();

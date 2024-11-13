@@ -65,12 +65,12 @@ const EmployeeList = () => {
                 <tbody className="bg-white">
                     {data.employees.map(employee => (
                         <tr key={employee.id}>
-                            <td className='py-4 px-6 border-b border-gray-200'>{employee.id}</td>
-                            <td className='py-4 px-6 border-b border-gray-200'>{employee.name}</td>
-                            <td className='py-4 px-6 border-b border-gray-200'>{employee.designation}</td>
-                            <td className='py-4 px-6 border-b border-gray-200'>{employee.salary}</td>
-                            <td className='py-4 px-6 border-b border-gray-200'>{employee.leaves}</td>
-                            <td className='py-4 px-6 border-b border-gray-200'>
+                            <td className='py-4 px-6 text-gray-500 border-b border-gray-200'>{employee.id}</td>
+                            <td className='py-4 px-6 text-gray-500 border-b border-gray-200'>{employee.name}</td>
+                            <td className='py-4 text-gray-500  px-6 border-b border-gray-200'>{employee.designation}</td>
+                            <td className='py-4  text-gray-500 px-6 border-b border-gray-200'>{employee.salary}</td>
+                            <td className='py-4 text-gray-500 px-6 border-b border-gray-200'>{employee.leaves}</td>
+                            <td className='py-4 text-gray-500 px-6 border-b border-gray-200'>
                                 <button 
                                     className="btn bg-red-500 text-white px-2 py-1 rounded mr-2"
                                     onClick={() => handleDelete(employee.id)}

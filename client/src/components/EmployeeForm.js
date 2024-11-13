@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { CREATE_EMPLOYEE } from '../graphql'; 
 import EmployeeList from './EmployeeList';
+import toast, { Toaster } from 'react-hot-toast';
 
 const EmployeeForm = () => {
     const [id, setId] = useState(''); 
@@ -15,28 +16,39 @@ const EmployeeForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        await createEmployee({
-            variables: {
-                id, 
-                name,
-                designation, 
-                salary: parseFloat(salary), 
-                leaves: parseInt(leaves),
+    
+        try {
+            // Attempt to create employee
+            await createEmployee({
+                variables: {
+                    id, 
+                    name,
+                    designation, 
+                    salary: parseFloat(salary), 
+                    leaves: parseInt(leaves),
+                }
+            });
+    
+            // Clear the form if successful
+            setId('');
+            setName('');
+            setDesignation('');
+            setSalary('');
+            setLeaves('');
+            toast.success("Succesfully Added")
+        } catch (error) {
+            if (error.message.includes('duplicate key error') || error.message.includes('ID already exists')) {
+                alert('Error: Employee ID already exists.');
+            } else {
+                alert('Error: ' + error.message);
             }
-        });
-
-       
-        setId('');
-        setName('');
-        setDesignation('');
-        setSalary('');
-        setLeaves('');
+        }
     };
+    
 
     return (
         <>
-            <div className='w-full flex justify-end pt-9 pr-9'>
+            <div className='w-full flex justify-end pt-2 pr-9'>
                 <button className="btn bg-slate-300 text-black" onClick={() => document.getElementById('my_modal_2').showModal()}>Add Employee</button>
             </div>
             <dialog id="my_modal_2" className="modal">
@@ -96,6 +108,7 @@ const EmployeeForm = () => {
                 </div>
             </dialog>
             <EmployeeList />
+            
         </>
     );
 };
