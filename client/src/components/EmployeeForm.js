@@ -18,7 +18,6 @@ const EmployeeForm = () => {
         e.preventDefault();
     
         try {
-            // Attempt to create employee
             await createEmployee({
                 variables: {
                     id, 
@@ -29,7 +28,6 @@ const EmployeeForm = () => {
                 }
             });
     
-            // Clear the form if successful
             setId('');
             setName('');
             setDesignation('');
